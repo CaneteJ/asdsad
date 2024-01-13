@@ -1,0 +1,387 @@
+.body-content {
+    font-family: 'Georgina', sans-serif;
+    color: #343a40; /* Dark grey color for text */
+  
+}
+  
+  /* Profile Header */
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px;
+}
+  
+  /* Profile Image Section */
+  .profile-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    position: relative;
+    border: 10px solid transparent; /* Border made transparent */
+}
+
+.profile-image::before {
+    content: '';
+    position: absolute;
+    top: -5px; 
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 40%;
+    z-index: -1;
+    background: linear-gradient(45deg, #007bff, #33b5e5, #ff6b6b, #fd746c);
+    background-size: 400% 400%;
+    animation: movingBorder 4s ease infinite;
+}
+  
+@keyframes movingBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+  /* User Info Section */
+  .user-info-section {
+    flex-grow: 1;
+    padding-left: 20px;
+  }
+  
+  .edit-input, .read-only-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-input:focus, .read-only-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Buttons */
+  .button-common {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-save-btn, .upload-image-btn {
+    background-color: #007bff; /* Bootstrap primary blue */
+    border: 'none';
+    color: white;
+  }
+  
+  .edit-save-btn:hover, .upload-image-btn:hover {
+    background-color: #6ab2ff; /* Darker blue for hover */
+    transform: scale(1.05); /* Slight grow effect */
+  }
+  
+  /* Info Section */
+  .info-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .company-info-section, .agent-info-section, .company-info-display {
+    margin-bottom: 20px;
+  }
+  
+  .company-info-heading, .info-text {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .icon-image {
+    width: 20px;
+    margin-right: 10px;
+    vertical-align: middle; /* Aligns image with text */
+  }
+
+  .moving-car-background {
+    position: relative;
+    overflow: hidden; /* Ensures the car doesn't overflow outside the div */
+    background-color: #e0e0e0; /* Example background color */
+    /* Add other styling as necessary (height, width, etc.) */
+}
+
+.moving-car-background::before {
+    content: '🚗'; /* Car Emoji as an example */
+    position: absolute;
+    background-color: #3b89ac;
+    left: -50px; /* Start off-screen */
+    bottom: 10px; /* Position at the bottom of the div */
+    font-size: 30px; /* Size of the car */
+    animation: moveCar 5s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes moveCar {
+    0% { left: -50px; }
+    100% { left: 100%; } /* Move to the full width of the div */
+}
+.moving-car-background {
+    position: relative;
+    overflow: hidden;
+    background-color: #e0e0e0; /* Example background color */
+    /* Set desired height and width */
+}
+
+.moving-car-background::before {
+    content: '🚗'; /* Car Emoji */
+    position: absolute;
+    left: -50px;
+    bottom: 10px;
+    font-size: 30px;
+    animation: moveCar 5s linear infinite;
+}
+
+@keyframes moveCar {
+    0% { left: -50px; }
+    100% { left: 100%; }
+}
+
+/* Trees or other elements */
+.moving-car-background::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px; /* Height of the 'trees' */
+    width: 100%; /* Full width */
+    background: repeating-linear-gradient(
+        90deg,
+        #4c9a2a,
+        #4c9a2a 20px,
+        #367314 20px,
+        #367314 40px
+    ); /* Creates 'tree' blocks */
+    z-index: -1;
+}
+.relative-container {
+    position: relative;
+}
+
+.moving-car-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Ensure the scene is behind the content */
+    /* Add styles for moving car scene */
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 1; /* Ensures your content is above the scene */
+    /* Other styling as needed */
+}
+
+.road {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    background-color: #333; /* Road color */
+    z-index: 1;
+}
+
+.car {
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+    font-size: 40px;
+    z-index: 2;
+    animation: moveCar 13s linear infinite;
+    transform: scaleX(-1);
+}
+.car2 {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  font-size: 40px;
+  z-index: 2;
+  animation: moveCar 12s linear infinite;
+  transform: scaleX(-1);
+}
+.car3 {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  font-size: 25px;
+  z-index: 2;
+  animation: moveCar 11s linear infinite;
+  transform: scaleX(-1);
+}
+.car4 {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  font-size: 35px;
+  z-index: 2;
+  animation: moveCar 10s linear infinite;
+  transform: scaleX(-1);
+}
+.car5 {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  font-size: 30px;
+  z-index: 2;
+  animation: moveCar 12s linear infinite;
+  transform: scaleX(-1);
+}
+
+@keyframes moveCar {
+    from { left: -50px; }
+    to { left: 100%; }
+}
+
+.tree, .cloud {
+    position: absolute;
+    background-color: #228B22; /* Green for trees */
+    z-index: 0;
+}
+
+.tree {
+    bottom: 40px;
+    width: 20px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.tree1 { left: 10%; }
+.tree2 { left: 80%; }
+
+.cloud {
+    top: 20px;
+    width: 60px;
+    height: 20px;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.cloud1 { left: 20%; }
+.cloud2 { left: 70%; }
+
+
+
+.body {
+
+margin: 0;
+padding: 0;
+}
+.wrapper{
+position: absolute;
+width: 100%;
+height: 100%;
+overflow: hidden;
+background: linear-gradient (90deg, rgba(2,0,.6,1) 0%, Orgba(9,9,121,1) 35%, rgba(0, 212, 255, 1)100%);
+}
+
+.box div{
+position: absolute;
+width: 60px;
+height: 60px;
+background-color:transparent;
+border: 6px solid rgba(255,255,255,0.8);
+}
+
+.box div:nth-child(1){
+top: 12%; left: 42%;
+animation: animate 10s linear infinite;
+}
+
+.box div:nth-child(2){
+top: 70%;
+left: 50%;
+animation: animate 7s linear infinite;
+}
+
+.box div:nth-child(2){
+  top: 17%;
+  left: 6%;
+  animation: animate 9s linear infinite;
+  }
+
+.box div:nth-child(3){
+  top: 17%;
+  left: 6%;
+  animation: animate 9s linear infinite;
+  }
+.box div:nth-child(4){
+  top: 20%;
+  left: 60%;
+  animation: animate 10s linear infinite;
+  }  
+.box div:nth-child(5){
+  top: 67%;
+  left: 10%;
+  animation: animate 6s linear infinite;
+  }  
+.box div:nth-child(6){
+  top: 80%;
+  left: 70%;
+  animation: animate 12s linear infinite;
+  } 
+
+.box div:nth-child(7){
+  top: 60%;
+  left: 80%;
+  animation: animate 15s linear infinite;
+  } 
+
+.box div:nth-child(8){
+  top: 32%;
+  left: 25%;
+  animation: animate 16s linear infinite;
+  }
+
+.box div:nth-child(9){
+  top: 90%;
+  left: 25%;
+  animation: animate 9s linear infinite;
+  }
+.box div:nth-child(10){
+  top: 20%;
+  left: 80%;
+  animation: animate 5s linear infinite;
+  }
+
+  @keyframes animate {
+    0%{
+      transform: scale(0) translateY(0) rotate(0); 
+      opacity: 1;
+    }
+    100%{
+    transform: scale(1.3) translateY(-90px) rotate(360deg);
+    opacity: 0;
+    }
+}

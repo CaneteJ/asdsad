@@ -3,6 +3,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from "../config/firebase";
 import UserContext from '../UserContext';
+import './OperatorProfile_UI';
 
 const Reservation = () => {
   const { user } = useContext(UserContext);
@@ -14,20 +15,25 @@ const Reservation = () => {
     const q = query(collection(db, 'reservations'), where('managementName', '==', managementName));
     try {
       const querySnapshot = await getDocs(q);
-      const reservations = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().name, 
-        plateNumber: doc.data().carPlate,
-        floor: doc.data().slotId.charAt(0), 
-        slot: doc.data().slotId.slice(1), 
-        timeOfRequest: new Date(doc.data().timestamp.seconds * 1000).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric' })
-      }));
+      const reservations = querySnapshot.docs.map(doc => {
+        const timestamp = doc.data().timestamp.seconds;
+        const dateObject = new Date(timestamp * 1000);
+        const formattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        
+        return {
+          id: doc.id,
+          name: doc.data().name,
+          plateNumber: doc.data().carPlate,
+          floor: doc.data().slotId.charAt(0),
+          slot: doc.data().slotId.slice(1),
+          timeOfRequest: formattedTime,
+        };
+      });
       setReservationRequests(reservations);
     } catch (error) {
       console.error("Error fetching reservations: ", error);
     }
   };
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       if (currentUser && user?.managementName) {
@@ -67,8 +73,6 @@ const Reservation = () => {
       timeOfRequest,
     };
 
-    setHistoryLog([logEntry, ...historyLog]);
-
     localStorage.setItem('historyLog', JSON.stringify([logEntry, ...historyLog]));
 
     const updatedRequests = [...reservationRequests];
@@ -85,15 +89,6 @@ const Reservation = () => {
     });
   };
 
-  const HistoryLog = () => (
-    <div className="history-log mt-4" style={{ maxHeight: '200px', overflowY: 'scroll' }}>
-      {historyLog.map((logEntry, index) => (
-        <div className={`alert ${logEntry.status === 'Accepted' ? 'alert-success' : 'alert-danger'} mt-2`} key={index}>
-          <strong>{logEntry.status}:</strong> {logEntry.name} requested a reservation on {logEntry.timeOfRequest}. Plate Number: {logEntry.plateNumber}, Floor: {logEntry.floor}, Slot: {logEntry.slot}
-        </div>
-      ))}
-    </div>
-  );
 
   const ReservationRequest = ({ request, index }) => (
     <div className="reservation-request mb-4 border p-3 rounded bg-light" key={request.plateNumber}>
@@ -110,7 +105,47 @@ const Reservation = () => {
   );
 
   return (
-    <div>
+    <div className='wrapper'>
+      <div className='box'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+        
+    <div className='wrapper' style={{position: 'relative'}}>
+      <div className='box'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+        {/* Moving Car Scene */}
+        <div className="moving-car-scene">
+        <div className="road">
+            <div className="car">🚗</div> {/* Car Emoji */}
+            <div className="car2">🚕</div> {/* Car Emoji */}
+            <div className="car3">🏍️</div> {/* Car Emoji */}
+            <div className="car4">🚙</div> {/* Car Emoji */}
+            <div className="car5">🚐</div> {/* Car Emoji */}
+        </div>
+        <div className="tree tree1"></div>
+        <div className="tree tree2"></div>
+    </div>
+   
+
       <nav className="navbar navbar-dark bg-dark">
         <div className="container">
           <a className="navbar-brand" href="ViewSpace">
@@ -119,8 +154,8 @@ const Reservation = () => {
         </div>
       </nav>
       <div className="container mt-5 d-flex flex-column align-items-center justify-content-center">
-        <h2 className="text-center mb-4">Parking Reservation Management</h2>
-        <div className="reservation-requests d-flex flex-column align-items-center mb-4" style={{ width: '300px', height: '400px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px', background: 'white' }}>
+        <h2 className="text-center mb-4" style={{color: 'white'}}>Parking Reservation Management</h2>
+        <div className="reservation-requests d-flex flex-column align-items-center mb-4" style={{ width: '600px', height:'60vh', overflowY: 'scroll', padding: '10px', background: 'rgba(0, 0, 0, 0.5)'}}>
           {reservationRequests.length === 0 ? (
             <p>No reservation</p>
           ) : (
@@ -129,11 +164,11 @@ const Reservation = () => {
             ))
           )}
         </div>
-        <h3 className="mb-3 mt-4 text-center">Accepted/Declined Reservations</h3>
-        <HistoryLog />
       </div>
     </div>
+    </div>
   );
+  
 };
 
 export default Reservation;

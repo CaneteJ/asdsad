@@ -12,8 +12,6 @@ import {db} from "../config/firebase"
 import {doc, getDoc, collection, query, where, getDocs} from 'firebase/firestore';
 import UserContext from '../UserContext';
 
-
-
 function OperatorDashboard() {
   const { user } = useContext(UserContext);
   const [agentFirst, setAgentFirstName] = useState(user.firstName || "");
@@ -106,8 +104,7 @@ function OperatorDashboard() {
   
   
   return (
-   
-    <div style={{ backgroundImage: 'url(https://wallpapers.com/images/featured/parking-m0fbqsngq0e6zxp2.jpg)', minHeight: '100hv', backgroundSize: 'cover',backgroundRepeat: 'no-repeat',backgroundPosition: 'center'}}>
+    <div style={{ backgroundColor: '#3b89ac', minHeight: "100vh"}}>
     <Container>
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#003851" }}>
         <div className="container">
@@ -143,119 +140,43 @@ function OperatorDashboard() {
         </div>
       </nav>
       <div className="container text-center" style={{ marginTop: '30px', fontFamily: 'Courier New', fontSize: '30px'}}>
-        <p style={{color:'white'}} >Welcome {agentFullName}  </p>
+        <p style={{color:'white'}}>Welcome {agentFullName}  </p>
       </div>
       <div className="row mt-3 ">
-      <div className="col-md-3">
-  <Card style={{   height: '100%', 
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black with 50% opacity
-  color: 'white', // Assuming you want the text color to be white
-  border: 'none' // Optional: removes the card border if present
-}}>
-    <Card.Body  style={{ 
-    display: 'flex', 
-    flexDirection: 'column', 
-    justifyContent: 'center' 
-  }}>
-      <Card.Title style={{ 
-      fontFamily: 'Courier New', 
-      textAlign: 'center' 
-    }}>
-        <FontAwesomeIcon icon={faCar} color="green" /> Parking Availability
-      </Card.Title>
-      <Card.Text style={{ 
-      textAlign: 'center', 
-      fontFamily: 'Copperplate', 
-      fontSize: '20px' 
-    }}>
-        {totalSlots}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-</div>
-<div className="col-md-3">
-<Card style={{ 
-  height: '100%', 
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black with 50% opacity
-  color: 'white', // Assuming you want the text color to be white
-  border: 'none' // Optional: removes the card border if present
-}}>
-  <Card.Body style={{ 
-    display: 'flex', 
-    flexDirection: 'column', 
-    justifyContent: 'center' 
-  }}>
-    <Card.Title style={{ 
-      fontFamily: 'Courier New', 
-      textAlign: 'center' 
-    }}>
-        <FontAwesomeIcon icon={faCoins} color="red" /> Total Revenues
-      </Card.Title>
-      <Card.Text style={{ 
-      textAlign: 'center', 
-      fontFamily: 'Copperplate', 
-      fontSize: '20px' }}>
-        {totalRevenues}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-</div>
-<div className="col-md-3">
-<Card style={{ 
-  height: '100%', 
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black with 50% opacity
-  color: 'white', // Assuming you want the text color to be white
-  border: 'none' // Optional: removes the card border if present
-}}>
-  <Card.Body style={{ 
-    display: 'flex', 
-    flexDirection: 'column', 
-    justifyContent: 'center' 
-  }}>
-    <Card.Title style={{ 
-      fontFamily: 'Courier New', 
-      textAlign: 'center' 
-    }}>
-        <FontAwesomeIcon icon={faUser} color="blue" /> Total Users today
-      </Card.Title>
-      <Card.Text style={{ 
-      textAlign: 'center', 
-      fontFamily: 'Copperplate', 
-      fontSize: '20px'}}>
-        {totalUsers}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-</div>
-<div className="col-md-3">
-<Card style={{ 
-  height: '100%', 
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black with 50% opacity
-  color: 'white', // Assuming you want the text color to be white
-  border: 'none' // Optional: removes the card border if present
-}}>
-  <Card.Body style={{ 
-    display: 'flex', 
-    flexDirection: 'column', 
-    justifyContent: 'center' 
-  }}>
-    <Card.Title style={{ 
-      fontFamily: 'Courier New', 
-      textAlign: 'center' 
-    }}>
-        <FontAwesomeIcon icon={faFileInvoiceDollar} color="orange" /> Parking Payment
-      </Card.Title>
-      <Card.Text style={{ 
-      textAlign: 'center', 
-      fontFamily: 'Copperplate', 
-      fontSize: '20px'}}>
-        {parkingPay}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-</div>
+        <div className="col-md-3">
+          <Card> 
+            <Card.Body>
+              <Card.Title style={{fontFamily:'Courier New', textAlign:'center'}}> <FontAwesomeIcon icon={faCar} color="green"/> Parking Availability</Card.Title>
+              <Card.Text style={{ textAlign: 'center', margin: '0 auto', fontFamily:'Copperplate', fontSize:'20px' }}>{totalSlots}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-md-3">
+          <Card>
+            <Card.Body>
+              <Card.Title style={{fontFamily:'Courier New', textAlign:'center'}}><FontAwesomeIcon icon={faCoins} color="red"/> Total Revenues</Card.Title>
+              <Card.Text style={{ textAlign: 'center', margin: '0 auto', fontFamily:'Copperplate', fontSize:'20px' }}>{totalRevenues}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-md-3">
+          <Card>
+            <Card.Body>
+              <Card.Title style={{fontFamily:'Courier New', textAlign:'center'}}><FontAwesomeIcon icon={faUser} color="blue" /> Total Users today</Card.Title>
+              <Card.Text style={{ textAlign: 'center', margin: '0 auto', fontFamily:'Copperplate', fontSize:'20px' }}>{totalUsers}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-md-3">
+          <Card>
+            <Card.Body>
+              <Card.Title style={{fontFamily:'Courier New', textAlign:'center'}}><FontAwesomeIcon icon={faFileInvoiceDollar} color="orange"/> Parking Payment</Card.Title>
+              <Card.Text style={{ textAlign: 'center', margin: '0 auto', fontFamily:'Copperplate', fontSize:'20px' }}>{parkingPay}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>  
       </div>
-      <div style={{marginTop: '30px', textAlign: 'center',  width: '100%', fontFamily:'Garamond', maxHeight: '800px', overflowY: 'scroll'}}>
+      <div style={{marginTop: '30px', textAlign: 'center', justifyContent: 'center',  width: '100%', fontFamily:'Garamond'}}>
           <Table responsive>
             <thead>
               <tr>
@@ -267,7 +188,6 @@ function OperatorDashboard() {
                 <th>Payment Status</th>
               </tr>
             </thead>
-        
             <tbody>
               {parkingLogs.map((log) => (
                 <tr key={log.id}>

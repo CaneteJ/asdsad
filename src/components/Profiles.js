@@ -227,7 +227,7 @@ export default function EditButton() {
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">
             <MDBCard>
-            <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
+            <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: 'white', height: '200px' }}>
             <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '200px' }}>
                   { }
                  <MDBCardImage 
@@ -244,7 +244,7 @@ export default function EditButton() {
                 setImageUpload(event.target.files[0]);
               }}
             />
-            <button onClick={uploadFile}> Upload Image</button>
+            <button onClick={uploadFile}>Upload Image</button>
           </>
         )}
                 </div>
